@@ -6,6 +6,8 @@ echo "The job name is: ${env.JOB_NAME}"
 echo "The Build NUmber is: ${env.BUILD_NUMBER}"
 echo "The Node name is: ${env.NODE_NAME}"
 
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
+
 //Checkout code from Git
 stage('CheckoutCode'){
 git branch: 'development', credentialsId: 'c9635f5b-e3cd-4ed3-86a0-ad865b5320bc', url: 'https://github.com/devopstrainingNS/maven-web-application.git'
